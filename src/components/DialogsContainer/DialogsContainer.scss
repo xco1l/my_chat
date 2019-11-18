@@ -1,0 +1,28 @@
+.dialogs-container {
+
+    &__dialog-wrap {
+        box-sizing: border-box;
+        padding: 15px 20px;
+        cursor: pointer;
+        border-left: 1px solid #f7f7f7;
+
+        &:hover {
+            background-color: #f3f7ff;
+        }
+
+        &.active {
+            background-color: #cfd8eb;
+        }
+    }
+
+    &__search {
+        grid-area: s;
+        padding: 20px 20px 20px 20px;
+
+        input {
+            background-color: #f7f8f9;
+            border: none;
+        }
+    }
+    
+}

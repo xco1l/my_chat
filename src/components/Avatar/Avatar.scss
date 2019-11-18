@@ -1,0 +1,20 @@
+.avatar {
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+
+    &_noImage {
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    img {
+        border-radius: inherit;
+        width: inherit;
+        height: inherit;
+    }
+}

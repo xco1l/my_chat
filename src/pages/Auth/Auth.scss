@@ -1,0 +1,27 @@
+.auth {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    &__content {
+        width: 420px;
+    }
+  
+    &__caption {
+        text-align: center;
+  
+        h2 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+  
+        p {
+            margin-bottom: 50px;
+        }
+    }
+  
+    .form {
+      text-align: center;
+    }
+  }

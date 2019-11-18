@@ -1,0 +1,118 @@
+.chat {
+    $self: &;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    grid-template-rows: 50px calc(100vh - 100px) 50px;
+    grid-template-areas:'h m'
+                        'd m'
+                        'd in';   
+    background-color: #fff;
+    max-width: 1140px;
+    flex-grow: 1;
+    box-shadow: 0 0 25px rgba(#000, 0.4);
+
+    &__header {
+        grid-area: h;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-right: 1px solid #f7f7f7;
+        border-bottom: 1px solid #f7f7f7;
+
+        &-sectionName {
+            margin-left: 8px;
+        }
+    }
+
+
+    &__dialogs-container {
+        grid-area: d;
+        max-width: 320px;
+        border-right: 1px solid #f7f7f7;
+        overflow-y: auto;
+
+    }
+
+    &__messages {
+        
+
+        &-container {
+            grid-area: m;
+            position: relative;
+            height: 100%;
+            overflow: auto;
+
+            .ant-empty {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .ant-spin {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+        
+        &-input-wrap {
+            grid-area: in;
+            height: 50px;
+            width: 100%;
+            display: flex;
+            padding: 20px;
+            align-items: center;
+            position: sticky;
+            bottom: 0;
+            background-color: #f7f7f7;
+        }
+
+    }
+
+
+    &__dialogInfo {
+        height: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: sticky;
+        background-color: #fff;
+        top: 0;
+        border-bottom: 1px solid #f7f7f7;
+
+        &-options {
+            cursor: pointer;
+            position: absolute;
+            right: 30px;
+        }
+
+        &-userName{
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        &-status {
+            display: none;
+            color: #d4d4d4;
+
+            &_online{
+                display: flex;
+                align-items: center;
+
+                &:before {
+                    content: '';
+                    display: inline-block;
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background-color: #00c980;
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+}

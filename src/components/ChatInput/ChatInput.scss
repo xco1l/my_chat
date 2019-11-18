@@ -1,0 +1,47 @@
+.chat-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: inherit;
+
+    &__picker {
+        position: absolute;
+        bottom: 50px;
+
+    }
+   
+    &__smile-btn {
+        position: relative;
+    }
+    input {
+        border: none;
+        background-color: inherit;
+
+        &:focus {
+            border: none;
+            box-shadow: none;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 10%;
+
+        &-upload {
+           &,
+           input,
+           button {
+            cursor: pointer;
+           } 
+
+            &:hover {
+                button {
+                    opacity: 1;
+                }
+            }
+            
+        }
+    }
+}

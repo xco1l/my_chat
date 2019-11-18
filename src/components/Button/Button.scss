@@ -1,0 +1,33 @@
+.button {
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 40px;
+    outline: none;
+    cursor: pointer;
+    height: 40px;
+  
+    &_size {
+  
+      &-lg {
+        width: 100%;
+      }
+  
+      &-md {
+        width: 100px;
+      }
+    }
+  
+    &_kind {
+  
+      &-primary {
+        color: #fff;
+        border: none;
+        background-color: #007bff;
+      }
+    }
+
+    &:disabled {
+      background-color: graytext;
+      color: #555151;
+    }
+  }
