@@ -42,7 +42,7 @@ const Home = props => {
         </div>
 
 
-        <div className="chat__messages-container">
+        <div className="chat__messages-container-wrap">
           <MessagesContainer userId={userId} />
         </div>
 

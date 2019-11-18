@@ -37,11 +37,12 @@
     &__messages {
         
 
-        &-container {
+        &-container-wrap {
             grid-area: m;
             position: relative;
-            height: 100%;
-            overflow: auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 50px 1fr;
 
             .ant-empty {
                 position: absolute;

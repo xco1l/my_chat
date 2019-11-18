@@ -13,7 +13,7 @@ const MessagesContainer = ({ items, currentDialog, fetchMessages, isLoading, dia
         addMessage(data);
     };
 
-    const messageRef = useRef(null)
+    const messagesEndRef = useRef(null)
     const [partner, setPartner] = useState({})
 
 
@@ -30,8 +30,8 @@ const MessagesContainer = ({ items, currentDialog, fetchMessages, isLoading, dia
     )
 
     useEffect(() => {
-        messageRef.current.scrollTo(0, 999999999999999)
-    }, [items])
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+    }, [items, isLoading])
 
 
 
@@ -39,7 +39,7 @@ const MessagesContainer = ({ items, currentDialog, fetchMessages, isLoading, dia
     return <MessagesContainerComponent
         items={items}
         isLoading={isLoading}
-        blockRef={messageRef}
+        blockRef={messagesEndRef}
         partner={partner}
         user={user}
         currentDialog = {currentDialog}

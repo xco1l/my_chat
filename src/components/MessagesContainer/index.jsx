@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import propTypes from 'prop-types'
 import { Empty, Spin } from 'antd'
 
@@ -9,14 +9,13 @@ import { Message, DialogInfoBar } from 'components'
 
 const MessagesContainer = ({ blockRef, isLoading, items, partner, user, currentDialog }) => {
   return (
-    <div className="">
+    <Fragment >
 
-        <DialogInfoBar fullname={partner.fullname} isOnline={partner.isOnline} currentDialog = {currentDialog} />
+      <DialogInfoBar fullname={partner.fullname} isOnline={partner.isOnline} currentDialog={currentDialog} />
 
 
       <div
         className='messages-container'
-        ref={blockRef}
       >
         {!currentDialog ? <Empty description='Please select a dialog or start ne one!' /> : isLoading ? (
           <Spin
@@ -27,15 +26,16 @@ const MessagesContainer = ({ blockRef, isLoading, items, partner, user, currentD
           items.map(item => {
             const isMe = user.id === item.user.id
             return (
-              <Message {...item} key={item._id} isMe = {isMe} />
+              <Message {...item} key={item._id} isMe={isMe} />
             )
           })
         ) : (
               <Empty description='No messages found. Send a message first!' />
             )}
-
+        <div ref={blockRef}></div>
       </div>
-    </div>
+
+    </Fragment>
   )
 
 };
