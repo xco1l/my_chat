@@ -1,5 +1,4 @@
 import { messagesApi } from 'utils/api'
-import { messagesActions } from '.';
 
 const actions = {
     setMessages: items => ({
