@@ -5,15 +5,20 @@ import { dialogsActions } from 'redux/actions'
 import { DialogsContainer as DialogsContainerComponent } from 'components'
 import socket from 'core/socket'
 
-const DialogsContainer = ({ dialogs, userId, setCurrentDialogId, currentDialogId, fetchDialogs }) => {
+const DialogsContainer = ({ dialogs, partner, userId, setCurrentDialogId, currentDialogId, fetchDialogs }) => {
 
+    console.log(partner)
     const [value, setValue] = useState('')
     const [filtered, setFilteredDialogs] = useState(Array.from(dialogs))
+    console.log(filtered)
     const onChangeInput = value => {
 
         setFilteredDialogs(
             dialogs.filter(
-                dialog => dialog.user.fullname.toLowerCase().indexOf(value.toLowerCase()) >= 0
+                dialog => {
+                    const partner = dialog.chatters.filter(user=> user._id !== userId)[0]
+                    return partner.fullname.toLowerCase().indexOf(value.toLowerCase()) >= 0
+                }
             )
         )
         
