@@ -7,18 +7,18 @@ import './MessagesContainer.scss'
 import { Message, DialogInfoBar } from 'components'
 
 
-const MessagesContainer = ({ blockRef, isLoading, items, partner, user }) => {
+const MessagesContainer = ({ blockRef, isLoading, items, partner, user, currentDialog }) => {
   return (
     <div className="">
-      <div className="chat__dialogInfo">
-        <DialogInfoBar fullname={partner.fullname} isOnline={partner.isOnline} />
-      </div>
+
+        <DialogInfoBar fullname={partner.fullname} isOnline={partner.isOnline} currentDialog = {currentDialog} />
+
 
       <div
         className='messages-container'
         ref={blockRef}
       >
-        {isLoading ? (
+        {!currentDialog ? <Empty description='Please select a dialog or start ne one!' /> : isLoading ? (
           <Spin
             tip='Loading messages...'
             size='large'

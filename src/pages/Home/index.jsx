@@ -9,14 +9,12 @@ import { dialogsActions, userActions } from 'redux/actions';
 
 import{di} from 'redux'
 const Home = props => {
-  console.log(props)
   const { setCurrentDialogId, user, fetchUserData } = props;
   const userId = user && user._id
 
   useEffect(() => {
     if (!user)
       fetchUserData()
-      console.log(user)
   }, [user, fetchUserData])
 
   useEffect(() => {

@@ -42,6 +42,7 @@ const MessagesContainer = ({ items, currentDialog, fetchMessages, isLoading, dia
         blockRef={messageRef}
         partner={partner}
         user={user}
+        currentDialog = {currentDialog}
     />
 };
 
