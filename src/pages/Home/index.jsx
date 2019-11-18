@@ -4,20 +4,26 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import './Home.scss'
-
 import { MessagesContainer, DialogsContainer, ChatInput } from 'containers'
-import { dialogsActions } from 'redux/actions';
+import { dialogsActions, userActions } from 'redux/actions';
 
-
+import{di} from 'redux'
 const Home = props => {
-
-  const { setCurrentDialogId, user } = props;
+  console.log(props)
+  const { setCurrentDialogId, user, fetchUserData } = props;
   const userId = user && user._id
+
+  useEffect(() => {
+    if (!user)
+      fetchUserData()
+      console.log(user)
+  }, [user, fetchUserData])
 
   useEffect(() => {
     const { pathname } = props.location;
     const dialogId = pathname.split('/').pop();
     setCurrentDialogId(dialogId);
+
   }, [props.location, setCurrentDialogId]);
 
 
@@ -34,12 +40,12 @@ const Home = props => {
         </div>
 
         <div className="chat__dialogs-container">
-          <DialogsContainer userId = {userId} />
+          <DialogsContainer userId={userId} />
         </div>
 
 
         <div className="chat__messages-container">
-          <MessagesContainer userId = {userId} />
+          <MessagesContainer userId={userId} />
         </div>
 
         <div className="chat__messages-input-wrap">
@@ -53,7 +59,7 @@ const Home = props => {
 
 export default withRouter(
   connect(
-    ({ user }) => ({user: user.data}),
-    dialogsActions,
+    ({ user, dialogs }) => ({ user: user.data}, {dialogs: dialogs.dialogs}),
+    {...userActions, ...dialogsActions},
   )(Home),
 );

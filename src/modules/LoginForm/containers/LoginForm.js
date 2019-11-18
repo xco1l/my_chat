@@ -3,14 +3,14 @@ import store from 'redux/store'
 
 
 import LoginForm from '../components/LoginForm'
-import {userActions} from 'redux/actions'
+import { userActions } from 'redux/actions'
 
 
 
-export default  withFormik({
-    mapPropsToValues: () => ({ 
-        email: '', 
-        password: '' 
+export default withFormik({
+    mapPropsToValues: () => ({
+        email: '',
+        password: ''
     }),
     enableReinitialize: true,
     validate: (values) => {
@@ -26,15 +26,15 @@ export default  withFormik({
     handleSubmit: (values, { setSubmitting, props }) => {
         store
             .dispatch(userActions.fetchUserSignIn(values))
-            .then( status  => {
-                console.log(props)
-                console.log(status)
-                if (status === 'success') {
-                  props.history.push('/');
-                }
-                console.log(props)
+            .then(status => {
                 setSubmitting(false);
-              })
+                if (status === 'success') {
+                    props.history.push('/');
+                }
+            })
+            .catch(() => {
+                setSubmitting(false);
+            })
     },
 
     displayName: 'LoginForm'

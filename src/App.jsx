@@ -10,8 +10,8 @@ const App = (props) => {
   return (
     <div className="wrap">
       <Switch >
-        <Route path={['/signin', '/signup']} render={() => isAuth ? <Redirect to='/' /> : <Auth />} />
         <Route exact path={['/', '/im']} render={() => isAuth ? <Home /> : <Redirect to='/signin' />} />
+        <Route path={['/signin', '/signup']} render={() => isAuth ? <Redirect to='/' /> : <Auth />} />
         <Route path='*' component={NotFound} />
       </Switch>
     </div>
