@@ -27,9 +27,12 @@ export default  withFormik({
         store
             .dispatch(userActions.fetchUserSignIn(values))
             .then( status  => {
+                console.log(props)
+                console.log(status)
                 if (status === 'success') {
                   props.history.push('/');
                 }
+                console.log(props)
                 setSubmitting(false);
               })
     },

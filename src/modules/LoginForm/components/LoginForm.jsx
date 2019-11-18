@@ -6,15 +6,12 @@ import { Link } from 'react-router-dom'
 
 const LoginForm = (
     {
-        values,
         touched,
         errors,
         isSubmitting,
         handleChange,
         handleBlur,
         handleSubmit,
-        handleReset,
-        dirty,
     }) => {
     return (
         <div>
@@ -53,7 +50,7 @@ const LoginForm = (
                             size='md'
                             type='submit'
                         >
-                            log in
+                            Log in
                     </Button>
                     </Form.Item>
                     <Form.Item className='form__link'>
