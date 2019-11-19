@@ -26,12 +26,6 @@ export default withFormik({
     handleSubmit: (values, { setSubmitting, props }) => {
         store
             .dispatch(userActions.fetchUserSignIn(values))
-            .then(status => {
-                setSubmitting(false);
-                if (status === 'success') {
-                    props.history.push('/');
-                }
-            })
             .catch(() => {
                 setSubmitting(false);
             })
