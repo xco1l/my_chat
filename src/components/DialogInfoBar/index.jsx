@@ -13,7 +13,7 @@ const DialogInfoBar = ({fullname, isOnline, currentDialog}) => {
             </h3>
             <span className={classNames("chat__dialogInfo-status", {
                 "chat__dialogInfo-status_online": isOnline
-            })}> online </span>
+            })}> {isOnline ? 'online' : 'Заходил 15 назад'} </span>
 
             <Button icon='ellipsis' type='link' shape='circle' className='chat__dialogInfo-options' />
         </div>) : null
