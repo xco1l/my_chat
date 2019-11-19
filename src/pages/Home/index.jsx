@@ -38,12 +38,12 @@ const Home = props => {
         </div>
 
         <div className="chat__dialogs-container">
-          <DialogsContainer userId={userId} />
+          <DialogsContainer />
         </div>
 
 
         <div className="chat__messages-container-wrap">
-          <MessagesContainer userId={userId} />
+          <MessagesContainer />
         </div>
 
         <div className="chat__messages-input-wrap">
