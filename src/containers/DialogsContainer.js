@@ -5,8 +5,9 @@ import { dialogsActions } from 'redux/actions'
 import { DialogsContainer as DialogsContainerComponent } from 'components'
 import socket from 'core/socket'
 
-const DialogsContainer = ({ dialogs, partner, userId, setCurrentDialogId, currentDialogId, fetchDialogs }) => {
+const DialogsContainer = ({ dialogs, user, setCurrentDialogId, currentDialogId, fetchDialogs }) => {
 
+    const [userId, setUserId] = useState(null)
     const [value, setValue] = useState('')
     const [filtered, setFilteredDialogs] = useState(Array.from(dialogs))
     const onChangeInput = value => {
@@ -33,6 +34,11 @@ const DialogsContainer = ({ dialogs, partner, userId, setCurrentDialogId, curren
         setFilteredDialogs(dialogs)
     }, [dialogs, fetchDialogs])
 
+    useEffect(() => {
+        if (user)
+            setUserId(user._id)
+    },[user])  
+
 
 
     return <DialogsContainerComponent
@@ -45,4 +51,7 @@ const DialogsContainer = ({ dialogs, partner, userId, setCurrentDialogId, curren
     />
 };
 
-export default connect(({ dialogs }) => dialogs, dialogsActions)(DialogsContainer);
+export default connect(({ dialogs, user }) => ({
+    dialogs: dialogs.dialogs,
+    user: user.data
+}), dialogsActions)(DialogsContainer);

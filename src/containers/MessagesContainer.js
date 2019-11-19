@@ -7,7 +7,7 @@ import { MessagesContainer as MessagesContainerComponent } from 'components'
 import socket from 'core/socket'
 
 
-const MessagesContainer = ({ items, currentDialog, fetchMessages, isLoading, dialogs, user, addMessage }) => {
+const MessagesContainer = ({ items, currentDialog, fetchMessages, isLoading, user, addMessage }) => {
 
     const onNewMessage = data => {
         addMessage(data);
@@ -20,7 +20,7 @@ const MessagesContainer = ({ items, currentDialog, fetchMessages, isLoading, dia
     useEffect(() => {
         if (currentDialog) {
             fetchMessages(currentDialog._id)
-            setPartner(currentDialog.chatters.find(chatter => chatter.id === user._id))
+            setPartner(currentDialog.chatters.find(chatter => chatter.id !== user._id))
         }
 
         socket.on('SERVER:NEW_MESSAGE', onNewMessage);
