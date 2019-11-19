@@ -1,16 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import { Button } from 'antd'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import './Home.scss'
 import { MessagesContainer, DialogsContainer, ChatInput } from 'containers'
-import { dialogsActions, userActions } from 'redux/actions';
+import { dialogsActions, userActions } from 'redux/actions'
 
-import{di} from 'redux'
 const Home = props => {
-  const { setCurrentDialogId, user, fetchUserData } = props;
-  const userId = user && user._id
+  const { setCurrentDialogId, user, fetchUserData } = props
 
   useEffect(() => {
     if (!user)
@@ -18,11 +16,11 @@ const Home = props => {
   }, [user, fetchUserData])
 
   useEffect(() => {
-    const { pathname } = props.location;
-    const dialogId = pathname.split('/').pop();
-    setCurrentDialogId(dialogId);
+    const { pathname } = props.location
+    const dialogId = pathname.split('/').pop()
+    setCurrentDialogId(dialogId)
 
-  }, [props.location, setCurrentDialogId]);
+  }, [props.location, setCurrentDialogId])
 
 
   return (
@@ -52,12 +50,15 @@ const Home = props => {
 
       </div>
     </section>
-  );
-};
+  )
+}
 
 export default withRouter(
   connect(
-    ({ user, dialogs }) => ({ user: user.data}, {dialogs: dialogs.dialogs}),
+    ({ user, dialogs }) => ({ 
+      user: user.data, 
+      dialogs: dialogs.dialogs
+    }),
     {...userActions, ...dialogsActions},
   )(Home),
-);
+)
