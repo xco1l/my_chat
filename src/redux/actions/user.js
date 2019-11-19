@@ -17,6 +17,12 @@ const actions = {
                 dispatch(actions.setUserData(data))
                 dispatch(actions.setIsAuth(true))
             })
+            .catch(err => {
+                if (err.response.status === 403) {
+                  dispatch(actions.setIsAuth(false));
+                  delete window.localStorage.token;
+                }
+              });
     },
     fetchUserSignIn: postData => dispatch => {
         return userApi.signIn(postData).then(({ data }) => {
