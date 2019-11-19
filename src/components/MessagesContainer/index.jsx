@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import propTypes from 'prop-types'
 import { Empty, Spin } from 'antd'
 
-
 import './MessagesContainer.scss'
 import { Message, DialogInfoBar } from 'components'
 
@@ -11,7 +10,11 @@ const MessagesContainer = ({ blockRef, isLoading, items, partner, user, currentD
   return (
     <Fragment >
 
-      <DialogInfoBar fullname={partner.fullname} isOnline={partner.isOnline} currentDialog={currentDialog} />
+      <DialogInfoBar 
+        fullname={partner.fullname} 
+        currentDialog={currentDialog} 
+        last_seen = {partner.last_seen}
+      />
 
 
       <div

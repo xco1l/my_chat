@@ -96,23 +96,8 @@
             margin-bottom: 5px;
         }
 
-        &-status {
+        &-lastSeen {
             color: #d4d4d4;
-
-            &_online{
-                display: flex;
-                align-items: center;
-
-                &:before {
-                    content: '';
-                    display: inline-block;
-                    width: 6px;
-                    height: 6px;
-                    border-radius: 50%;
-                    background-color: #00c980;
-                    margin-right: 8px;
-                }
-            }
         }
     }
 }
