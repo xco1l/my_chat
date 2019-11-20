@@ -20,18 +20,24 @@ const MessagesContainer = ({ blockRef, isLoading, items, partner, user, currentD
       <div
         className='messages-container'
       >
-        {!currentDialog ? <Empty description='Please select a dialog or start ne one!' /> : isLoading ? (
+        {!currentDialog ? <Empty description='Please select a dialog or start new one!' /> : isLoading ? (
           <Spin
             tip='Loading messages...'
             size='large'
           />
         ) : items.length && !isLoading ? (
-          items.map(item => {
+          <div>
+          {items.map(item => {
             const isMe = user.id === item.user.id
             return (
-              <Message {...item} key={item._id} isMe={isMe} />
+              
+              <Message {...item} key={item._id} isMe={isMe}/>
+
+              
             )
-          })
+          })}
+         {currentDialog.isTyping ? <Message isTyping = {true} user = {partner} /> : null}
+          </div>
         ) : (
               <Empty description='No messages found. Send a message first!' />
             )}

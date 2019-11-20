@@ -20,11 +20,11 @@ const getMessageTime = created_at => {
 
 const Dialog = ({
     partner,
-    createdAt,
+    isTyping,
     isMe,
     lastMessage,
     onSelect,
-    _id
+    _id,
 }) => {
     return (
         <div
@@ -42,9 +42,11 @@ const Dialog = ({
                 <span className='dialog__date'>{getMessageTime(new Date(lastMessage.createdAt))}</span>
             </div>
             <div className="dialog__item dialog__item-body">
-                <p className="dialog__lastMessage">{lastMessage.text}</p>
-                {isMe ? (<IconReaded isReaded={lastMessage.isReaded} />) :
-                    (lastMessage.unreaded > 0 && <span className="dialog__count">{lastMessage.unreaded}</span>)
+                
+                <p className="dialog__lastMessage">{isTyping ? 'typing...' : lastMessage.text}</p>
+                {
+                !isTyping && ( isMe ?  (<IconReaded isReaded={lastMessage.isReaded} />) :
+                    (lastMessage.unreaded > 0 && <span className="dialog__count">{lastMessage.unreaded}</span>))
                 }
 
             </div>

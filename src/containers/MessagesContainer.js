@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import find from 'lodash/find'
 
@@ -7,14 +7,16 @@ import { MessagesContainer as MessagesContainerComponent } from 'components'
 import socket from 'core/socket'
 
 
-const MessagesContainer = ({ items, currentDialog, fetchMessages, isLoading, user, addMessage }) => {
+const MessagesContainer = ({ items, currentDialog, fetchMessages, isLoading, user, addMessage, dialogs }) => {
 
     const onNewMessage = data => {
-        addMessage(data);
-    };
+        addMessage(data)
+    }
 
-    const messagesEndRef = useRef(null)
+
+
     const [partner, setPartner] = useState({})
+    const messagesEndRef = useRef(null)
 
 
     useEffect(() => {
@@ -23,16 +25,14 @@ const MessagesContainer = ({ items, currentDialog, fetchMessages, isLoading, use
             setPartner(currentDialog.chatters.find(chatter => chatter.id !== user._id))
         }
 
-        socket.on('SERVER:NEW_MESSAGE', onNewMessage);
+        socket.on('SERVER:NEW_MESSAGE', onNewMessage)
 
-        return () => socket.removeListener('SERVER:NEW_MESSAGE', onNewMessage);
-    }, [currentDialog]
-    )
+        return () => socket.removeListener('SERVER:NEW_MESSAGE', onNewMessage)
+    }, [currentDialog])
 
     useEffect(() => {
         messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
-    }, [items, isLoading])
-
+    }, [items, isLoading, dialogs])
 
 
 
@@ -42,19 +42,19 @@ const MessagesContainer = ({ items, currentDialog, fetchMessages, isLoading, use
         blockRef={messagesEndRef}
         partner={partner}
         user={user}
-        currentDialog = {currentDialog}
+        currentDialog={currentDialog}
     />
-};
+}
 
 
 
 export default connect(
     ({ messages, dialogs, user }) => ({
-        currentDialog: find(dialogs.dialogs, { _id: dialogs.currentDialogId }),
+        currentDialog: dialogs.currentDialog,
         dialogs: dialogs.dialogs,
         items: messages.items,
         isLoading: messages.isLoading,
         user: user.data
     }),
     messagesActions
-)(MessagesContainer);
+)(MessagesContainer)

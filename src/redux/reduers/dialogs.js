@@ -1,6 +1,6 @@
 const initialState = {
     dialogs: [],
-    currentDialogId: null
+    currentDialog: null
 }
 
 export default ((state = initialState, {type, payload}) => {
@@ -10,11 +10,23 @@ export default ((state = initialState, {type, payload}) => {
                 ...state,
                 dialogs: payload
             }
-        case 'DIALOGS:SET_CURRENT_DIALOG_ID':
+        case 'DIALOGS:SET_CURRENT_DIALOG_BY_ID':
             return {
                 ...state,
-                currentDialogId: payload
-            }    
+                currentDialog: state.dialogs.find(dialog => dialog._id === payload)
+            }
+        case 'DIALOGS:SET_DIALOGS_IS_TYPING':
+            return {
+                ...state,
+                dialogs: state.dialogs.map(dialog => {
+                    if ( payload.typingDialogs.indexOf(dialog._id) >= 0) {
+                        dialog.isTyping = true
+                    }
+                        
+                    else dialog.isTyping = false
+                    return dialog
+                })
+            }        
         default:
             return state
     }
