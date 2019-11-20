@@ -11,11 +11,14 @@ const DialogsContainer = ({ dialogs, user, setCurrentDialog, currentDialog, fetc
     const [value, setValue] = useState('')
     const [filteredDialogs, setFilteredDialogs] = useState(Array.from(dialogs))
     const [typingDialogs, setTypingDialogs] = useState([])
+    const [currentDialogId, setCurrentDialogId] = useState([])
 
     const queue = array => {
         array.shift()
         return array
     }
+
+
 
     const push = (array, value) => {
         array.push(value)
@@ -51,10 +54,10 @@ const DialogsContainer = ({ dialogs, user, setCurrentDialog, currentDialog, fetc
 
         socket.on('DIALOG:TYPING', ({ dialogId }) => {
             setTypingDialogs(push(typingDialogs, dialogId))
-            setDialogIsTyping({typingDialogs})
+            setDialogIsTyping({ typingDialogs })
             setTimeout(() => {
                 setTypingDialogs(queue(typingDialogs))
-                setDialogIsTyping({typingDialogs})
+                setDialogIsTyping({ typingDialogs })
             }, 3000)
         })
 
@@ -68,17 +71,23 @@ const DialogsContainer = ({ dialogs, user, setCurrentDialog, currentDialog, fetc
             setUserId(user._id)
     }, [user])
 
+    useEffect(() => {
+        if (currentDialog)
+            setCurrentDialogId(currentDialog._id)
+    }, [currentDialog])
+
     return <DialogsContainerComponent
         dialogs={filteredDialogs}
         userId={userId}
         onSearch={onChangeInput}
         inputValue={value}
         onSelectDialog={setCurrentDialog}
-        currentDialogId={currentDialog._id}
+        currentDialogId={currentDialogId}
     />
 };
 
 export default connect(({ dialogs, user }) => ({
     dialogs: dialogs.dialogs,
+    currentDialog: dialogs.currentDialog,
     user: user.data
 }), dialogsActions)(DialogsContainer);
