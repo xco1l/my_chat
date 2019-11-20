@@ -57,9 +57,6 @@ const DialogsContainer = ({ dialogs, user, setCurrentDialog, currentDialogId, fe
                 setTypingDialogs(queue(typingDialogs))
                 setDialogIsTyping({typingDialogs})
             }, 3000)
-    
-
-
         })
 
 
