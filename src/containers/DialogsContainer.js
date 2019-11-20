@@ -5,7 +5,7 @@ import { dialogsActions } from 'redux/actions'
 import { DialogsContainer as DialogsContainerComponent } from 'components'
 import socket from 'core/socket'
 
-const DialogsContainer = ({ dialogs, user, setCurrentDialog, currentDialogId, fetchDialogs, setDialogIsTyping }) => {
+const DialogsContainer = ({ dialogs, user, setCurrentDialog, currentDialog, fetchDialogs, setDialogIsTyping }) => {
 
     const [userId, setUserId] = useState(null)
     const [value, setValue] = useState('')
@@ -31,8 +31,7 @@ const DialogsContainer = ({ dialogs, user, setCurrentDialog, currentDialogId, fe
                 } else {
                     return dialog
                 }
-            }
-            )
+            })
         })
 
         setValue(value)
@@ -75,7 +74,7 @@ const DialogsContainer = ({ dialogs, user, setCurrentDialog, currentDialogId, fe
         onSearch={onChangeInput}
         inputValue={value}
         onSelectDialog={setCurrentDialog}
-        currentDialogId={currentDialogId}
+        currentDialogId={currentDialog._id}
     />
 };
 
