@@ -5,23 +5,19 @@ import { withRouter } from 'react-router'
 
 import './Home.scss'
 import { MessagesContainer, DialogsContainer, ChatInput } from 'containers'
-import { dialogsActions, userActions } from 'redux/actions'
+import { userActions } from 'redux/actions'
+import socket from 'core/socket'
 
 const Home = props => {
-  const { setCurrentDialogId, user, fetchUserData } = props
+  const { user, fetchUserData } = props
 
   useEffect(() => {
-    if (!user)
+    socket.on('connect', () => {
+      if (!user)
       fetchUserData()
-  }, [user, fetchUserData])
+    })
 
-  useEffect(() => {
-    const { pathname } = props.location
-    const dialogId = pathname.split('/').pop()
-    setCurrentDialogId(dialogId)
-
-  }, [props.location, setCurrentDialogId])
-
+  })
 
   return (
     <section className='home'>
@@ -55,10 +51,7 @@ const Home = props => {
 
 export default withRouter(
   connect(
-    ({ user, dialogs }) => ({ 
-      user: user.data, 
-      dialogs: dialogs.dialogs
-    }),
-    {...userActions, ...dialogsActions},
+    ({ user }) => ({user: user.data}),
+    userActions,
   )(Home),
 )
